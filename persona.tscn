@@ -1,16 +1,16 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://persona.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://head.png" type="Texture" id=2]
 [ext_resource path="res://Humer.gd" type="Script" id=3]
 [ext_resource path="res://102215_1200_howtoroundt6.png" type="Texture" id=4]
 [ext_resource path="res://Radi.gd" type="Script" id=5]
 [ext_resource path="res://orange_bod.png" type="Texture" id=6]
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
-radius = 24.3598
+extents = Vector2( 14.9243, 15.7638 )
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -23,7 +23,7 @@ height = 33.8681
 custom_solver_bias = 0.0
 extents = Vector2( 18.1549, 27.5807 )
 
-[node name="Persona" type="StaticBody2D" index="0"]
+[node name="Persona" type="StaticBody2D"]
 
 position = Vector2( 0, -16 )
 input_pickable = false
@@ -39,7 +39,6 @@ player_id = -1
 
 [node name="Cap" type="Node2D" parent="." index="0"]
 
-editor/display_folded = true
 position = Vector2( 0, -77.4869 )
 _sections_unfolded = [ "Transform" ]
 
@@ -67,12 +66,14 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="icon" type="Sprite" parent="Cap/Crani" index="0"]
 
-scale = Vector2( 0.687488, 0.687488 )
+position = Vector2( 0, 9.93881 )
+scale = Vector2( 0.275427, 0.275427 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cap/Crani" index="1"]
 
+position = Vector2( 0, 15 )
 shape = SubResource( 3 )
 
 [node name="B_Dret" type="Node2D" parent="." index="1"]
@@ -176,7 +177,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="B_Esquerra" type="Node2D" parent="." index="2"]
 
-editor/display_folded = true
 position = Vector2( -25, -23 )
 _sections_unfolded = [ "Transform" ]
 
