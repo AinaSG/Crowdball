@@ -1,0 +1,114 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Custom_char.gd" type="Script" id=1]
+[ext_resource path="res://blue_bg_dark.png" type="Texture" id=2]
+[ext_resource path="res://bg.gd" type="Script" id=3]
+[ext_resource path="res://Character.gd" type="Script" id=4]
+[ext_resource path="res://head.png" type="Texture" id=5]
+[ext_resource path="res://head_cosmetics/0.png" type="Texture" id=6]
+[ext_resource path="res://blue_bod.png" type="Texture" id=7]
+[ext_resource path="res://Body.gd" type="Script" id=8]
+[ext_resource path="res://bod_cosmetics/0.png" type="Texture" id=9]
+[ext_resource path="res://Body_cosmetic.gd" type="Script" id=10]
+[ext_resource path="res://Arrows.gd" type="Script" id=11]
+[ext_resource path="res://arrow.png" type="Texture" id=12]
+
+[node name="Custom_char" type="Node2D"]
+
+script = ExtResource( 1 )
+playerid = -1
+team = 1
+
+[node name="Bg" type="Node2D" parent="." index="0"]
+
+[node name="bg" type="Sprite" parent="Bg" index="0"]
+
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="Character" type="Node2D" parent="." index="1"]
+
+script = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Head_node" type="Node2D" parent="Character" index="0"]
+
+position = Vector2( 0, -70 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Head" type="Sprite" parent="Character/Head_node" index="0"]
+
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Head_cosmetic" type="Sprite" parent="Character/Head_node" index="1"]
+
+texture = ExtResource( 6 )
+
+[node name="Body_node" type="Node2D" parent="Character" index="1"]
+
+position = Vector2( 0, 85 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Body" type="Sprite" parent="Character/Body_node" index="0"]
+
+scale = Vector2( 0.381129, 0.331108 )
+texture = ExtResource( 7 )
+script = ExtResource( 8 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Body_cosmetic" type="Sprite" parent="Character/Body_node" index="1"]
+
+scale = Vector2( 0.381129, 0.331108 )
+texture = ExtResource( 9 )
+script = ExtResource( 10 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Tween" type="Tween" parent="Character" index="2"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+_sections_unfolded = [ "Pause", "playback" ]
+
+[node name="Arrows" type="Node2D" parent="." index="2"]
+
+position = Vector2( 0, -8.51158 )
+script = ExtResource( 11 )
+
+[node name="blue" type="Sprite" parent="Arrows" index="0"]
+
+self_modulate = Color( 0.367188, 0.629211, 1, 1 )
+position = Vector2( 93.0244, -42.9396 )
+scale = Vector2( 0.0365602, 0.039766 )
+texture = ExtResource( 12 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="orange" type="Sprite" parent="Arrows" index="1"]
+
+modulate = Color( 0.941406, 0.550456, 0.0478058, 1 )
+position = Vector2( -93.0244, -42.9396 )
+scale = Vector2( -0.03656, 0.039766 )
+texture = ExtResource( 12 )
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+
+[node name="green" type="Sprite" parent="Arrows" index="2"]
+
+self_modulate = Color( 0.273191, 0.6875, 0.104736, 1 )
+position = Vector2( 93.0244, 42.9396 )
+scale = Vector2( 0.0365602, 0.039766 )
+texture = ExtResource( 12 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="yellow" type="Sprite" parent="Arrows" index="3"]
+
+self_modulate = Color( 0.992188, 1, 0, 1 )
+position = Vector2( -93.0244, 42.9396 )
+scale = Vector2( -0.03656, 0.039766 )
+texture = ExtResource( 12 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+
