@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://persona.tscn" type="PackedScene" id=1]
+
+[node name="Scene" type="Node2D" index="0"]
+
+[node name="Persona" parent="." index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 148.646, 165.348 )
+player_id = 0
+
+[node name="Persona2" parent="." index="1" instance=ExtResource( 1 )]
+
+position = Vector2( 458.565, 166.325 )
+player_id = 1
+
+[node name="Persona3" parent="." index="2" instance=ExtResource( 1 )]
+
+position = Vector2( 348.195, 168.822 )
+player_id = 3
+
+[node name="Persona4" parent="." index="3" instance=ExtResource( 1 )]
+
+position = Vector2( 253.233, 168.822 )
+player_id = 2
+
+
