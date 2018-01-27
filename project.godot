@@ -16,7 +16,12 @@ config/icon="res://icon.png"
 
 [autoload]
 
-main="*res://main.gd"
+buzz="*res://buzz.gd"
+
+[display]
+
+window/size/width=1400
+window/size/resizable=false
 
 [gdnative]
 

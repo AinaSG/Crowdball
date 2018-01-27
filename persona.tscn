@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://persona.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -6,6 +6,11 @@
 [ext_resource path="res://102215_1200_howtoroundt6.png" type="Texture" id=4]
 [ext_resource path="res://Radi.gd" type="Script" id=5]
 [ext_resource path="res://orange_bod.png" type="Texture" id=6]
+
+[sub_resource type="CircleShape2D" id=3]
+
+custom_solver_bias = 0.0
+radius = 24.3598
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -16,31 +21,63 @@ height = 33.8681
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 21.8898, 32.7208 )
+extents = Vector2( 18.1549, 27.5807 )
 
-[node name="Persona" type="Node2D"]
+[node name="Persona" type="StaticBody2D" index="0"]
 
+position = Vector2( 0, -16 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
 player_id = -1
 
 [node name="Cap" type="Node2D" parent="." index="0"]
 
 editor/display_folded = true
-position = Vector2( 0, -50 )
+position = Vector2( 0, -77.4869 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Crani" type="Node2D" parent="Cap" index="0"]
+[node name="Crani" type="RigidBody2D" parent="Cap" index="0"]
 
-editor/display_folded = true
+input_pickable = false
+collision_layer = 2
+collision_mask = 4
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+_sections_unfolded = [ "Collision" ]
 
 [node name="icon" type="Sprite" parent="Cap/Crani" index="0"]
 
+scale = Vector2( 0.687488, 0.687488 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cap/Crani" index="1"]
+
+shape = SubResource( 3 )
+
 [node name="B_Dret" type="Node2D" parent="." index="1"]
 
-position = Vector2( 29, 8 )
+position = Vector2( 23, -23 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Humer" type="RigidBody2D" parent="B_Dret" index="0"]
@@ -48,7 +85,7 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( 0.655853, 1.04031 )
 input_pickable = false
 collision_layer = 1
-collision_mask = 1
+collision_mask = 5
 mode = 0
 mass = 1.0
 friction = 1.0
@@ -65,7 +102,7 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 3 )
-_sections_unfolded = [ "Angular", "Transform", "Z Index" ]
+_sections_unfolded = [ "Angular", "Collision", "Transform", "Z Index" ]
 player_id = null
 torque = null
 
@@ -96,7 +133,7 @@ softness = 0.0
 position = Vector2( 0, 45 )
 input_pickable = false
 collision_layer = 1
-collision_mask = 1
+collision_mask = 5
 mode = 0
 mass = 1.0
 friction = 1.0
@@ -113,7 +150,7 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 5 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="B_Dret/Humer/Radi" index="0"]
 
@@ -139,7 +176,8 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="B_Esquerra" type="Node2D" parent="." index="2"]
 
-position = Vector2( -29, 8 )
+editor/display_folded = true
+position = Vector2( -25, -23 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Humer" type="RigidBody2D" parent="B_Esquerra" index="0"]
@@ -147,7 +185,7 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( 0.655853, 1.04031 )
 input_pickable = false
 collision_layer = 1
-collision_mask = 1
+collision_mask = 5
 mode = 0
 mass = 1.0
 friction = 1.0
@@ -164,7 +202,7 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 3 )
-_sections_unfolded = [ "Angular", "Transform", "Z Index" ]
+_sections_unfolded = [ "Angular", "Collision", "Transform", "Z Index" ]
 player_id = null
 torque = null
 
@@ -195,7 +233,7 @@ softness = 0.0
 position = Vector2( 0, 45 )
 input_pickable = false
 collision_layer = 1
-collision_mask = 1
+collision_mask = 5
 mode = 0
 mass = 1.0
 friction = 1.0
@@ -212,7 +250,7 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 5 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="B_Esquerra/Humer/Radi" index="0"]
 
@@ -238,20 +276,20 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Cos" type="StaticBody2D" parent="." index="3"]
 
-position = Vector2( 0, 20 )
+position = Vector2( 0, -17 )
 input_pickable = false
 collision_layer = 1
-collision_mask = 1
+collision_mask = 7
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="Cos" index="0"]
 
 position = Vector2( 0, -0.115057 )
-scale = Vector2( 0.14643, 0.14643 )
+scale = Vector2( 0.121013, 0.121013 )
 texture = ExtResource( 6 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
