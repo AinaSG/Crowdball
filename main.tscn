@@ -1,10 +1,131 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
+[ext_resource path="res://Ball.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Rotor.tscn" type="PackedScene" id=3]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=2]
 
+custom_solver_bias = 0.0
+extents = Vector2( 5, 300 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 800, 5 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="Main" type="StaticBody2D" index="0"]
+
+position = Vector2( 0, 600 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="Balls" type="Node2D" parent="." index="0"]
+
+editor/display_folded = true
+
+[node name="Ball" parent="Balls" index="0" instance=ExtResource( 2 )]
+
+[node name="Ball2" parent="Balls" index="1" instance=ExtResource( 2 )]
+
+position = Vector2( 520, -350 )
+
+[node name="Ball3" parent="Balls" index="2" instance=ExtResource( 2 )]
+
+position = Vector2( 880, -360 )
+
+[node name="Rotor" parent="." index="1" instance=ExtResource( 3 )]
+
+position = Vector2( 300, -450 )
+direction = -1
+
+[node name="Rotor2" parent="." index="2" instance=ExtResource( 3 )]
+
+position = Vector2( 1100, -450 )
+
+[node name="Walls" type="Node2D" parent="." index="3"]
+
+editor/display_folded = true
+_sections_unfolded = [ "Transform" ]
+
+[node name="WallLeft" type="StaticBody2D" parent="Walls" index="0"]
+
+position = Vector2( -20, -600 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 7
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallLeft" index="0"]
+
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="WallRight" type="StaticBody2D" parent="Walls" index="1"]
+
+position = Vector2( 1420, -600 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 7
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallRight" index="0"]
+
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Roof" type="StaticBody2D" parent="Walls" index="2"]
+
+position = Vector2( 700, -620 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 7
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Roof" index="0"]
+
+shape = SubResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Goals" type="Node2D" parent="." index="4"]
+
+[node name="Goal" type="Area2D" parent="Goals" index="0"]
+
+input_pickable = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = -1.0
+angular_damp = -1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision", "Pickable", "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goals/Goal" index="0"]
+
+shape = SubResource( 4 )
 
 

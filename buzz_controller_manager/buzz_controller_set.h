@@ -16,9 +16,15 @@ private:
    bool green_button[4]   = {false, false, false, false};
    bool yellow_button[4]  = {false, false, false, false};
 
+   bool last_big_red_button[4] = {false, false, false, false};
+   bool last_blue_button[4]    = {false, false, false, false};
+   bool last_orange_button[4]  = {false, false, false, false};
+   bool last_green_button[4]   = {false, false, false, false};
+   bool last_yellow_button[4]  = {false, false, false, false};
 
 public:
 	Array get_buttons_player(int player);
+	Array get_buttons_just_pressed_player(int player);
 	void set_lights(int bitmask);
 	void update_inputs();
 	void set_light_player(int player, bool on);

@@ -79,11 +79,19 @@ void BuzzControllerSet::set_light_player(int player, bool on){
 void BuzzControllerSet::update_inputs(){
 	unsigned char buf[5]; 
 	int res = hid_read(device, buf, 5); // 0 si res, n segons el numero de bytes llegits(8)
-	if (res==0){
-		return;
-	}
+	
 	if (res == -1){
 		print_line("[UPDATE_INPUT ERROR]");
+		return;
+	}
+
+	std::copy(std::begin(big_red_button), std::end(big_red_button), std::begin(last_big_red_button));
+	std::copy(std::begin(blue_button), std::end(blue_button), std::begin(last_blue_button));
+	std::copy(std::begin(orange_button), std::end(orange_button), std::begin(last_orange_button));
+	std::copy(std::begin(green_button), std::end(green_button), std::begin(last_green_button));
+	std::copy(std::begin(yellow_button), std::end(yellow_button), std::begin(last_yellow_button));
+
+	if (res==0){
 		return;
 	}
 
@@ -111,12 +119,6 @@ void BuzzControllerSet::update_inputs(){
 	yellow_button[1]  = (buf[2]>>6) & 1;
 	yellow_button[2]  = (buf[3]>>3) & 1;
 	yellow_button[3]  = (buf[4]>>0) & 1;
-
-	//big_red_button = {buf[2]>>0&1, buf[2]>>5&1, buf[3]>>2&1, buf[3]>>7&1};
-	//blue_button    = {buf[2]>>4&1, buf[3]>>1&1, buf[3]>>6&1, buf[4]>>3&1};
-	//orange_button  = {buf[2]>>3&1, buf[3]>>0&1, buf[3]>>5&1, buf[4]>>2&1};
-	//green_button   = {buf[2]>>2&1, buf[2]>>7&1, buf[3]>>4&1, buf[4]>>1&1};
-	//yellow_button  = {buf[2]>>1&1, buf[2]>>6&1, buf[3]>>3&1, buf[4]>>0&1};
 }
 
 Array BuzzControllerSet::get_buttons_player(int player){
@@ -126,6 +128,24 @@ Array BuzzControllerSet::get_buttons_player(int player){
 	return_values.push_back(Variant(orange_button[player]));
 	return_values.push_back(Variant(green_button[player]));
 	return_values.push_back(Variant(yellow_button[player]));
+
+	return return_values;
+}
+
+Array BuzzControllerSet::get_buttons_just_pressed_player(int player){
+	Array return_values;
+	return_values.push_back(Variant(big_red_button[player] && !last_big_red_button[player]));
+	return_values.push_back(Variant(blue_button[player] && !last_blue_button[player]));
+	return_values.push_back(Variant(orange_button[player] && !last_orange_button[player]));
+	return_values.push_back(Variant(green_button[player] && !last_green_button[player]));
+	return_values.push_back(Variant(yellow_button[player] && !last_yellow_button[player]));
+
+	/*return_values.push_back(Variant(last_big_red_button[player]));
+	return_values.push_back(Variant(last_blue_button[player]));
+	return_values.push_back(Variant(last_orange_button[player]));
+	return_values.push_back(Variant(last_green_button[player]));
+	return_values.push_back(Variant(last_yellow_button[player]));*/ 
+
 
 	return return_values;
 }

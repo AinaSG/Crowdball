@@ -7,6 +7,10 @@ export var player_id = -1
 const HUMER_VEL = 10
 const RADI_VEL = 8
 const IDLE_ANGULAR_DAMP = 200.0
+const SOFTNESS = 2
+const BIAS = 0.9
+const SWING_DEGREES = 50
+const SWING_SPEED = 0.6
 
 onready var humer_d = get_node("B_Dret/Humer")
 onready var humer_e = get_node("B_Esquerra/Humer")
@@ -18,39 +22,49 @@ onready var body = get_node("Cos")
 
 onready var pin_joint_humer_e = get_node("B_Esquerra/Humer/PinJoint2D")
 onready var pin_joint_radi_e = get_node("B_Esquerra/Humer/Radi/PinJoint2D")
+onready var pin_joint_humer_d = get_node("B_Dret/Humer/PinJoint2D")
+onready var pin_joint_radi_d = get_node("B_Dret/Humer/Radi/PinJoint2D")
+
+signal head_shot
 
 enum Direction { UP, DOWN }
 var swing_dir = 1
-var target_rotation_degrees = 0
+var swing_alpha = 0
 
 func _ready():
-	print("player %d ready" % player_id)
-	pin_joint_humer_e.softness = 1
-	pin_joint_radi_e.softness = 1
-	#body.angular_damp = INF
+	pin_joint_humer_e.softness = SOFTNESS
+	pin_joint_radi_e.softness  = SOFTNESS
+	pin_joint_humer_d.softness = SOFTNESS
+	pin_joint_radi_d.softness  = SOFTNESS
+	
+	pin_joint_humer_e.bias = BIAS
+	pin_joint_radi_e.bias  = BIAS
+	pin_joint_humer_d.bias = BIAS
+	pin_joint_radi_d.bias  = BIAS
+	pass
 	
 func _process(delta):
 	check_input()
 	
-	target_rotation_degrees += 5 * swing_dir * delta
-	if target_rotation_degrees > 25 or target_rotation_degrees < -25:
+	swing_alpha += SWING_SPEED * swing_dir * delta
+	if swing_alpha > 1 or swing_alpha < -1:
 		swing_dir *= -1
-		
-	#body.angular_velocity = 2 * body.rotation_degrees / (target_rotation_degrees) 
+		swing_alpha = clamp(swing_alpha,-1,1)
 	
+	body.rotation_degrees = cos(swing_alpha * 2 * PI) * SWING_DEGREES/2	
+	body.position.y = (sin(swing_alpha * 1.1 * 2 * PI + (player_id * PI/4)) * 0.5 + 0.5) * -5
 	
 func check_input():
 	if (player_id >= BuzzControllerManager.get_num_players()): return
+	arm_movement()
+	
+	var big_red_button_just_pressed = BuzzControllerManager.get_buttons_just_pressed_player(player_id)[0]
+	if big_red_button_just_pressed:
+		emit_signal("head_shot")
+	
+func arm_movement():
 	var buttons = BuzzControllerManager.get_buttons_player(player_id)
 	
-	arm_movement(buttons)
-	head_shot(buttons)
-	
-func head_shot(buttons):
-	if buttons[0]:
-		print("PINYAU")
-	
-func arm_movement(buttons):
 	if buttons[1]: # blue   (P)
 		radi_active(Direction.UP)
 	elif buttons[2]: # orange (O)

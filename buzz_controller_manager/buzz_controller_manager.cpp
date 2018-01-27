@@ -19,7 +19,8 @@ void BuzzControllerManager::_bind_methods() {
     ClassDB::bind_method(D_METHOD("find_controllers"), &BuzzControllerManager::find_controllers);
     ClassDB::bind_method(D_METHOD("set_lights", "bitmask"), &BuzzControllerManager::set_lights);   
 	ClassDB::bind_method(D_METHOD("set_light_player", "player", "on"), &BuzzControllerManager::set_light_player);
-	ClassDB::bind_method(D_METHOD("get_buttons_player", "player"), &BuzzControllerManager::get_buttons_player);  
+	ClassDB::bind_method(D_METHOD("get_buttons_player", "player"), &BuzzControllerManager::get_buttons_player);
+	ClassDB::bind_method(D_METHOD("get_buttons_just_pressed_player", "player"), &BuzzControllerManager::get_buttons_just_pressed_player);
     ClassDB::bind_method(D_METHOD("update_inputs"), &BuzzControllerManager::update_inputs);
     ClassDB::bind_method(D_METHOD("init"), &BuzzControllerManager::init);
     ClassDB::bind_method(D_METHOD("get_num_players"), &BuzzControllerManager::get_num_players);
@@ -91,3 +92,16 @@ Array BuzzControllerManager::get_buttons_player(int player){
 
 	return connected_sets[set].get_buttons_player(player_in_set);
 }
+
+Array BuzzControllerManager::get_buttons_just_pressed_player(int player){
+	int set = player / 4;
+	int player_in_set = player%4;
+
+	if (set >= connected_sets.size()) {
+		print_line("[get_buttons_just_pressed_player] Player index too high.");
+		return Array();
+	}
+
+	return connected_sets[set].get_buttons_just_pressed_player(player_in_set);
+}
+

@@ -30,6 +30,7 @@ public:
 
 	void update_inputs();
 	Array get_buttons_player(int player);
+	Array get_buttons_just_pressed_player(int player);
 
 	int get_num_players();
 
