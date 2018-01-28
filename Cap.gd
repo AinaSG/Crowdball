@@ -16,7 +16,6 @@ func _ready():
 	spawn_crani()
 
 func launch_head():
-	print("launching %d" % persona.player_id)
 	crani.launch()
 	BuzzControllerManager.set_light_player(persona.player_id, false)
 	
@@ -24,7 +23,6 @@ func launch_head():
 	timer.start()
 	
 func spawn_crani():
-	print("Spawn %d" % persona.player_id)
 	crani = Crani.instance()
 	add_child(crani)
 	BuzzControllerManager.set_light_player(persona.player_id, true)
