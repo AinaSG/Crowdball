@@ -14,8 +14,3 @@ func _ready():
 		p.position.y = 0
 		p.player_id = i
 		add_child(p)
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass

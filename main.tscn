@@ -1,25 +1,22 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
-[ext_resource path="res://Ball.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Balls.gd" type="Script" id=2]
 [ext_resource path="res://Rotor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Goals.gd" type="Script" id=4]
+[ext_resource path="res://Goal.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 5, 300 )
+extents = Vector2( 20, 300 )
 
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 800, 5 )
+extents = Vector2( 1000, 20 )
 
-[sub_resource type="RectangleShape2D" id=3]
-
-custom_solver_bias = 0.0
-extents = Vector2( 10, 10 )
-
-[node name="Main" type="StaticBody2D"]
+[node name="Main" type="StaticBody2D" index="0"]
 
 position = Vector2( 0, 600 )
 input_pickable = false
@@ -34,17 +31,8 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Balls" type="Node2D" parent="." index="0"]
 
-editor/display_folded = true
-
-[node name="Ball" parent="Balls" index="0" instance=ExtResource( 2 )]
-
-[node name="Ball2" parent="Balls" index="1" instance=ExtResource( 2 )]
-
-position = Vector2( 520, -350 )
-
-[node name="Ball3" parent="Balls" index="2" instance=ExtResource( 2 )]
-
-position = Vector2( 880, -360 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="Rotor" parent="." index="1" instance=ExtResource( 3 )]
 
@@ -111,21 +99,40 @@ _sections_unfolded = [ "Collision", "Transform" ]
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
+[node name="Roof2" type="StaticBody2D" parent="Walls" index="3"]
+
+position = Vector2( 700, 20 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 7
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Roof2" index="0"]
+
+position = Vector2( 0, 100 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
 [node name="Goals" type="Node2D" parent="." index="4"]
 
-[node name="Goal" type="Area2D" parent="Goals" index="0"]
+editor/display_folded = true
+script = ExtResource( 4 )
 
-input_pickable = false
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = -1.0
-angular_damp = -1.0
-audio_bus_override = false
-audio_bus_name = "Master"
-_sections_unfolded = [ "Collision", "Pickable", "Transform" ]
+[node name="Goal" parent="Goals" index="0" instance=ExtResource( 5 )]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Goals/Goal" index="0"]
+position = Vector2( -145, -100 )
+collision_layer = 8
 
-shape = SubResource( 3 )
+[node name="Goal2" parent="Goals" index="1" instance=ExtResource( 5 )]
+
+position = Vector2( 1545, -100 )
+
+[connection signal="body_entered" from="Goals/Goal" to="Goals" method="handle_goal" binds= [ "orange" ]]
+
+[connection signal="body_entered" from="Goals/Goal2" to="Goals" method="handle_goal" binds= [ "blue" ]]
 
 
