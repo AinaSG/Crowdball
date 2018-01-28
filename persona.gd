@@ -11,8 +11,10 @@ const RADI_VEL = 8
 const IDLE_ANGULAR_DAMP = INF
 const SOFTNESS = -0.001
 const BIAS = 0.9
-const SWING_DEGREES = 50
-const SWING_SPEED = 0.5
+var SWING_DEGREES = 50
+var SWING_SPEED = 0.5
+var JUMP_HEIGHT = 5
+var LEAVE_SPEED = -1
 
 onready var humer_d = get_node("B_Dret/Humer")
 onready var humer_e = get_node("B_Esquerra/Humer")
@@ -61,7 +63,10 @@ func _process(delta):
 		swing_alpha = clamp(swing_alpha,-1,1)
 	
 	body.rotation_degrees = cos(swing_alpha * 2 * PI) * SWING_DEGREES/2	
-	body.position.y = (sin(swing_alpha * 1.1 * 2 * PI + (player_id * PI/4)) * 0.5 + 0.5) * -5
+	if LEAVE_SPEED < 0:
+		body.position.y = (sin(swing_alpha * 1.1 * 2 * PI + (player_id * PI/4)) * 0.5 + 0.5) * -JUMP_HEIGHT
+	else:
+		body.position.y += LEAVE_SPEED * delta
 	
 func check_input():
 	if (player_id >= BuzzControllerManager.get_num_players()): return
@@ -117,3 +122,11 @@ func set_customization(indexes):
 	custom_head.head_cosmetic = indexes[0]
 	custom_body.texture = global.bod_cosm[indexes[1]]
 	print(indexes)
+	
+func celebrate(winner_team):
+	if (winner_team != team):
+		SWING_SPEED = 2
+		SWING_DEGREES = 70
+		JUMP_HEIGHT = 15
+	else:
+		LEAVE_SPEED = 60

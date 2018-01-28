@@ -1,6 +1,7 @@
 extends Node2D
 
 var Persona = preload("res://persona.tscn")
+onready var Goals = get_node("Goals")
 
 func _ready():
 	randomize()
@@ -23,10 +24,11 @@ func _ready():
 		
 		add_child(p)
 		
+		Goals.connect("won", p, "celebrate")
+		
 		if i < global.custom_players.size():
 			p.set_customization(global.custom_players[i])
 			
 func reset_game():
 	get_tree().change_scene("res://Cosmetic_selecc1.tscn")
-		
-		
+

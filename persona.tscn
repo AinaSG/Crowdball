@@ -12,7 +12,7 @@
 
 custom_solver_bias = 0.0
 radius = 5.01443
-height = 27.3187
+height = 40.6457
 
 [sub_resource type="RectangleShape2D" id=2]
 
@@ -40,7 +40,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Humer" type="RigidBody2D" parent="B_Dret" index="0"]
 
-editor/display_folded = true
 position = Vector2( 0.655853, 1.04031 )
 input_pickable = false
 collision_layer = 1
@@ -67,13 +66,15 @@ torque = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="B_Dret/Humer" index="0"]
 
+position = Vector2( 0, 4 )
+z_index = 1
 shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="Sprite" type="Sprite" parent="B_Dret/Humer" index="1"]
 
-position = Vector2( -0.522169, -19.3491 )
-scale = Vector2( 0.0329599, 0.232603 )
+position = Vector2( -0.522169, -18.7473 )
+scale = Vector2( 0.0329599, 0.279562 )
 texture = ExtResource( 3 )
 offset = Vector2( 15.8426, 83.1851 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
@@ -89,7 +90,7 @@ softness = 0.0
 
 [node name="Radi" type="RigidBody2D" parent="B_Dret/Humer" index="3"]
 
-position = Vector2( 0, 45 )
+position = Vector2( 0, 55 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 4
@@ -130,13 +131,12 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="B_Dret/Humer/Radi" index="2"]
 
-position = Vector2( 0, -3 )
+position = Vector2( 0, 0.648911 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="B_Esquerra" type="Node2D" parent="." index="1"]
 
-editor/display_folded = true
 position = Vector2( -25, -38 )
 _sections_unfolded = [ "Transform" ]
 
@@ -168,13 +168,15 @@ torque = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="B_Esquerra/Humer" index="0"]
 
+position = Vector2( 0, 3.58184 )
+z_index = 1
 shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="Sprite" type="Sprite" parent="B_Esquerra/Humer" index="1"]
 
 position = Vector2( -0.522169, -19.3491 )
-scale = Vector2( 0.0329599, 0.232603 )
+scale = Vector2( 0.03296, 0.279562 )
 texture = ExtResource( 3 )
 offset = Vector2( 15.8426, 83.1851 )
 _sections_unfolded = [ "Transform" ]
@@ -190,7 +192,7 @@ softness = 0.0
 
 [node name="Radi" type="RigidBody2D" parent="B_Esquerra/Humer" index="3"]
 
-position = Vector2( 0, 45 )
+position = Vector2( 0, 55 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 4
@@ -231,7 +233,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="B_Esquerra/Humer/Radi" index="2"]
 
-position = Vector2( 0, -3 )
+position = Vector2( 0, 0.502914 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 

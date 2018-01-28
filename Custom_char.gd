@@ -16,6 +16,11 @@ func _ready():
 		BuzzControllerManager.set_light_player(playerid,true)
 
 func _process(delta):
+	if body.current_cosmetic == 4 and head.current_cosmetic == 3:
+		get_node("Character/LOL").show()
+	else:
+		get_node("Character/LOL").hide()
+		
 	if (playerid >= BuzzControllerManager.get_num_players()): return
 	var buttons = BuzzControllerManager.get_buttons_just_pressed_player(playerid)
 	
@@ -23,5 +28,3 @@ func _process(delta):
 		choosing = not choosing
 		moving_char.active = choosing
 		BuzzControllerManager.set_light_player(playerid, choosing)
-		
-	pass

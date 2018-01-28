@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Custom_char.gd" type="Script" id=1]
 [ext_resource path="res://blue_bg_dark.png" type="Texture" id=2]
@@ -11,8 +11,9 @@
 [ext_resource path="res://Body.gd" type="Script" id=9]
 [ext_resource path="res://bod_cosmetics/0.png" type="Texture" id=10]
 [ext_resource path="res://Body_cosmetic.gd" type="Script" id=11]
-[ext_resource path="res://Arrows.gd" type="Script" id=12]
-[ext_resource path="res://arrow.png" type="Texture" id=13]
+[ext_resource path="res://lol.png" type="Texture" id=12]
+[ext_resource path="res://Arrows.gd" type="Script" id=13]
+[ext_resource path="res://arrow.png" type="Texture" id=14]
 
 [node name="Custom_char" type="Node2D"]
 
@@ -36,6 +37,7 @@ active = null
 
 [node name="Head_node" type="Node2D" parent="Character" index="0"]
 
+editor/display_folded = true
 position = Vector2( 0, -70 )
 _sections_unfolded = [ "Transform" ]
 
@@ -78,17 +80,22 @@ playback/repeat = false
 playback/speed = 1.0
 _sections_unfolded = [ "Pause", "playback" ]
 
+[node name="LOL" type="Sprite" parent="Character" index="3"]
+
+position = Vector2( 0, -164 )
+texture = ExtResource( 12 )
+
 [node name="Arrows" type="Node2D" parent="." index="2"]
 
 position = Vector2( 0, -8.51158 )
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 
 [node name="blue" type="Sprite" parent="Arrows" index="0"]
 
 self_modulate = Color( 0.367188, 0.629211, 1, 1 )
 position = Vector2( 93.0244, -42.9396 )
 scale = Vector2( 0.0365602, 0.039766 )
-texture = ExtResource( 13 )
+texture = ExtResource( 14 )
 _sections_unfolded = [ "Visibility" ]
 
 [node name="orange" type="Sprite" parent="Arrows" index="1"]
@@ -96,7 +103,7 @@ _sections_unfolded = [ "Visibility" ]
 modulate = Color( 0.941406, 0.550456, 0.0478058, 1 )
 position = Vector2( -93.0244, -42.9396 )
 scale = Vector2( -0.03656, 0.039766 )
-texture = ExtResource( 13 )
+texture = ExtResource( 14 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
 [node name="green" type="Sprite" parent="Arrows" index="2"]
@@ -104,7 +111,7 @@ _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 self_modulate = Color( 0.273191, 0.6875, 0.104736, 1 )
 position = Vector2( 93.0244, 42.9396 )
 scale = Vector2( 0.0365602, 0.039766 )
-texture = ExtResource( 13 )
+texture = ExtResource( 14 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="yellow" type="Sprite" parent="Arrows" index="3"]
@@ -112,7 +119,7 @@ _sections_unfolded = [ "Transform", "Visibility" ]
 self_modulate = Color( 0.992188, 1, 0, 1 )
 position = Vector2( -93.0244, 42.9396 )
 scale = Vector2( -0.03656, 0.039766 )
-texture = ExtResource( 13 )
+texture = ExtResource( 14 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
 
