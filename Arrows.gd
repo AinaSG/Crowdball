@@ -6,6 +6,7 @@ extends Node2D
 
 var alfa = 1
 var up = false
+onready var custom_char = get_node("../")
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -13,20 +14,23 @@ func _ready():
 	pass
 
 func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
+	
+	if custom_char.choosing:
+		if(up):
+			alfa = alfa + 1 * delta
+			if (alfa >= 1):
+				up = false
+				alfa = 1
+			
+		else: 
+			alfa = alfa - 1 * delta
+			if (alfa <= 0):
+				up = true
+				alfa = 0
+	else:
+		alfa = 0
+			
 	for child in get_children():
 		child.modulate.a = alfa
 	
-	if(up):
-		alfa = alfa + 1 * delta
-		if (alfa >= 1):
-			up = false
-			alfa = 1
-		
-	else: 
-		alfa = alfa - 1 * delta
-		if (alfa <= 0):
-			up = true
-			alfa = 0
 #	pass

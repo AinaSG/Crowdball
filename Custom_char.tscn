@@ -19,6 +19,7 @@
 script = ExtResource( 1 )
 playerid = -1
 team = 1
+choosing = true
 
 [node name="Bg" type="Node2D" parent="." index="0"]
 
@@ -31,6 +32,7 @@ script = ExtResource( 3 )
 
 script = ExtResource( 4 )
 _sections_unfolded = [ "Transform" ]
+active = null
 
 [node name="Head_node" type="Node2D" parent="Character" index="0"]
 

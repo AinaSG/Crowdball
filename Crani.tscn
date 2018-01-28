@@ -1,19 +1,19 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Crani.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://head.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 24.3598
+extents = Vector2( 15.1982, 15.5985 )
 
 [node name="Crani" type="RigidBody2D"]
 
-position = Vector2( 0, -57 )
+position = Vector2( 0, -49 )
 input_pickable = false
 collision_layer = 2
-collision_mask = 4
+collision_mask = 1048572
 mode = 1
 mass = 1.0
 friction = 1.0
@@ -30,16 +30,27 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 
-[node name="icon" type="Sprite" parent="." index="0"]
+[node name="head" type="Sprite" parent="." index="0"]
 
-scale = Vector2( 0.687488, 0.687488 )
+scale = Vector2( 0.30769, 0.30769 )
+z_index = -1
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
+offset = Vector2( 0, -17.5 )
+_sections_unfolded = [ "Offset", "Transform", "Z Index" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+[node name="Custom" type="Sprite" parent="." index="1"]
+
+scale = Vector2( 0.30769, 0.30769 )
+z_index = -1
+texture = ExtResource( 2 )
+offset = Vector2( 0, -17.5 )
+_sections_unfolded = [ "Offset", "Transform", "Z Index" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 

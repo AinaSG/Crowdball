@@ -6,11 +6,11 @@ extends Node2D
 export var player_id = -1
 const HUMER_VEL = 10
 const RADI_VEL = 8
-const IDLE_ANGULAR_DAMP = 200.0
-const SOFTNESS = 2
+const IDLE_ANGULAR_DAMP = INF
+const SOFTNESS = -0.001
 const BIAS = 0.9
 const SWING_DEGREES = 50
-const SWING_SPEED = 0.6
+const SWING_SPEED = 0.2
 
 onready var humer_d = get_node("B_Dret/Humer")
 onready var humer_e = get_node("B_Esquerra/Humer")
@@ -41,6 +41,13 @@ func _ready():
 	pin_joint_radi_e.bias  = BIAS
 	pin_joint_humer_d.bias = BIAS
 	pin_joint_radi_d.bias  = BIAS
+	
+	var l = 1 << (player_id + 3)
+	body.layers = l
+	humer_e.collision_mask |= l
+	radi_e.collision_mask  |= l
+	humer_d.collision_mask |= l
+	radi_d.collision_mask  |= l
 	pass
 	
 func _process(delta):
@@ -73,9 +80,9 @@ func arm_movement():
 		radi_idle()
 	
 	if buttons[3]: # green  (W)
-		humer_active(Direction.UP)
-	elif buttons[4]: # yellow (Q)
 		humer_active(Direction.DOWN)
+	elif buttons[4]: # yellow (Q)
+		humer_active(Direction.UP)
 	else:
 		humer_idle()
 
@@ -100,3 +107,11 @@ func humer_active(direction):
 func humer_idle():
 	humer_d.angular_damp = IDLE_ANGULAR_DAMP
 	humer_e.angular_damp = IDLE_ANGULAR_DAMP
+	
+func set_customization(indexes):
+	var global = get_node("/root/buzz")
+	var custom_body = get_node("Cos/Custom")
+	var custom_head = get_node("Cos/Cap")
+	custom_head.head_cosmetic = indexes[0]
+	custom_body.texture = global.bod_cosm[indexes[1]]
+	print(indexes)

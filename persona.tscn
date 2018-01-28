@@ -11,12 +11,12 @@
 
 custom_solver_bias = 0.0
 radius = 5.01443
-height = 33.8681
+height = 27.3187
 
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 18.1549, 27.5807 )
+extents = Vector2( 18.1549, 32.0905 )
 
 [node name="Persona" type="StaticBody2D"]
 
@@ -33,7 +33,6 @@ player_id = -1
 
 [node name="B_Dret" type="Node2D" parent="." index="0"]
 
-editor/display_folded = true
 position = Vector2( 23, -38 )
 _sections_unfolded = [ "Transform" ]
 
@@ -42,7 +41,7 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( 0.655853, 1.04031 )
 input_pickable = false
 collision_layer = 1
-collision_mask = 5
+collision_mask = 4
 mode = 0
 mass = 1.0
 friction = 1.0
@@ -82,7 +81,7 @@ position = Vector2( -0.263519, -19.237 )
 node_a = NodePath("..")
 node_b = NodePath("../../../Cos")
 bias = 0.0
-disable_collision = true
+disable_collision = false
 softness = 0.0
 
 [node name="Radi" type="RigidBody2D" parent="B_Dret/Humer" index="3"]
@@ -90,7 +89,7 @@ softness = 0.0
 position = Vector2( 0, 45 )
 input_pickable = false
 collision_layer = 1
-collision_mask = 5
+collision_mask = 4
 mode = 0
 mass = 1.0
 friction = 1.0
@@ -109,12 +108,7 @@ angular_damp = -1.0
 script = ExtResource( 4 )
 _sections_unfolded = [ "Collision", "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="B_Dret/Humer/Radi" index="0"]
-
-shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="PinJoint2D" type="PinJoint2D" parent="B_Dret/Humer/Radi" index="1"]
+[node name="PinJoint2D" type="PinJoint2D" parent="B_Dret/Humer/Radi" index="0"]
 
 position = Vector2( -0.263519, -19.237 )
 node_a = NodePath("..")
@@ -123,12 +117,18 @@ bias = 0.0
 disable_collision = true
 softness = 0.0
 
-[node name="Sprite" type="Sprite" parent="B_Dret/Humer/Radi" index="2"]
+[node name="Sprite" type="Sprite" parent="B_Dret/Humer/Radi" index="1"]
 
 position = Vector2( -0.522169, -19.3491 )
 scale = Vector2( 0.0329599, 0.232603 )
 texture = ExtResource( 3 )
 offset = Vector2( 15.8426, 83.1851 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="B_Dret/Humer/Radi" index="2"]
+
+position = Vector2( 0, -3 )
+shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="B_Esquerra" type="Node2D" parent="." index="1"]
@@ -141,7 +141,7 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( 0.655853, 1.04031 )
 input_pickable = false
 collision_layer = 1
-collision_mask = 5
+collision_mask = 4
 mode = 0
 mass = 1.0
 friction = 1.0
@@ -181,7 +181,7 @@ position = Vector2( -0.263519, -19.237 )
 node_a = NodePath("..")
 node_b = NodePath("../../../Cos")
 bias = 0.0
-disable_collision = true
+disable_collision = false
 softness = 0.0
 
 [node name="Radi" type="RigidBody2D" parent="B_Esquerra/Humer" index="3"]
@@ -189,7 +189,7 @@ softness = 0.0
 position = Vector2( 0, 45 )
 input_pickable = false
 collision_layer = 1
-collision_mask = 5
+collision_mask = 4
 mode = 0
 mass = 1.0
 friction = 1.0
@@ -208,12 +208,7 @@ angular_damp = -1.0
 script = ExtResource( 4 )
 _sections_unfolded = [ "Collision", "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="B_Esquerra/Humer/Radi" index="0"]
-
-shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="PinJoint2D" type="PinJoint2D" parent="B_Esquerra/Humer/Radi" index="1"]
+[node name="PinJoint2D" type="PinJoint2D" parent="B_Esquerra/Humer/Radi" index="0"]
 
 position = Vector2( -0.263519, -19.237 )
 node_a = NodePath("..")
@@ -222,7 +217,7 @@ bias = 0.0
 disable_collision = true
 softness = 0.0
 
-[node name="Sprite" type="Sprite" parent="B_Esquerra/Humer/Radi" index="2"]
+[node name="Sprite" type="Sprite" parent="B_Esquerra/Humer/Radi" index="1"]
 
 position = Vector2( -0.522169, -19.3491 )
 scale = Vector2( 0.0329599, 0.232603 )
@@ -230,11 +225,17 @@ texture = ExtResource( 3 )
 offset = Vector2( 15.8426, 83.1851 )
 _sections_unfolded = [ "Transform" ]
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="B_Esquerra/Humer/Radi" index="2"]
+
+position = Vector2( 0, -3 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
 [node name="Cos" type="RigidBody2D" parent="." index="2"]
 
 position = Vector2( 0, -13 )
 input_pickable = false
-collision_layer = 1
+collision_layer = 0
 collision_mask = 7
 mode = 1
 mass = 1.0
@@ -260,12 +261,18 @@ scale = Vector2( 0.121013, 0.121013 )
 texture = ExtResource( 5 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Cos" index="1"]
+[node name="Custom" type="Sprite" parent="Cos" index="1"]
 
-position = Vector2( 0, -21 )
+position = Vector2( 0, -21.1151 )
+scale = Vector2( 0.121013, 0.121013 )
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cos" index="2"]
+
+position = Vector2( 0, -15 )
 shape = SubResource( 2 )
 
-[node name="Cap" type="Node2D" parent="Cos" index="2"]
+[node name="Cap" type="Node2D" parent="Cos" index="3"]
 
 position = Vector2( 0, -21 )
 script = ExtResource( 6 )

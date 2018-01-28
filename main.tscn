@@ -1,20 +1,27 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://Balls.gd" type="Script" id=2]
 [ext_resource path="res://Rotor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Goals.gd" type="Script" id=4]
 [ext_resource path="res://Goal.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scores.gd" type="Script" id=6]
+[ext_resource path="res://font.tres" type="DynamicFont" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 20, 300 )
+extents = Vector2( 30, 250 )
 
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 1000, 20 )
+extents = Vector2( 750, 20 )
+
+[sub_resource type="Theme" id=3]
+
+default_font = ExtResource( 7 )
+_sections_unfolded = [ "Resource" ]
 
 [node name="Main" type="StaticBody2D" index="0"]
 
@@ -45,7 +52,6 @@ position = Vector2( 1100, -450 )
 
 [node name="Walls" type="Node2D" parent="." index="3"]
 
-editor/display_folded = true
 _sections_unfolded = [ "Transform" ]
 
 [node name="WallLeft" type="StaticBody2D" parent="Walls" index="0"]
@@ -120,18 +126,88 @@ _sections_unfolded = [ "Transform" ]
 [node name="Goals" type="Node2D" parent="." index="4"]
 
 script = ExtResource( 4 )
+score_blue_ = NodePath("../Scores/LabelBlue")
+score_orange_ = NodePath("../Scores/LabelOrange")
 
-[node name="Goal" parent="Goals" index="0" instance=ExtResource( 5 )]
+[node name="GoalOrange" parent="Goals" index="0" instance=ExtResource( 5 )]
 
 position = Vector2( -145, -100 )
-collision_layer = 8
 
-[node name="Goal2" parent="Goals" index="1" instance=ExtResource( 5 )]
+[node name="GoallBlue" parent="Goals" index="1" instance=ExtResource( 5 )]
 
 position = Vector2( 1545, -100 )
 
-[connection signal="body_entered" from="Goals/Goal" to="Goals" method="handle_goal" binds= [ "orange" ]]
+[node name="Scores" type="Control" parent="." index="5"]
 
-[connection signal="body_entered" from="Goals/Goal2" to="Goals" method="handle_goal" binds= [ "blue" ]]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 6 )
+
+[node name="LabelOrange" type="Label" parent="Scores" index="0"]
+
+anchor_left = 0.05
+anchor_top = 0.0
+anchor_right = 0.05
+anchor_bottom = 0.0
+margin_left = -2.0
+margin_top = -600.0
+margin_right = 198.0
+margin_bottom = -400.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 7 )
+text = "0"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+uppercase = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "Focus", "Hint", "Mouse", "Rect", "Size Flags", "Theme", "custom_fonts" ]
+
+[node name="LabelBlue" type="Label" parent="Scores" index="1"]
+
+anchor_left = 0.05
+anchor_top = 0.0
+anchor_right = 0.05
+anchor_bottom = 0.0
+margin_left = 1198.0
+margin_top = -600.0
+margin_right = 1398.0
+margin_bottom = -400.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme = SubResource( 3 )
+text = "0"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+uppercase = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "Focus", "Hint", "Mouse", "Rect", "Size Flags", "Theme", "custom_fonts" ]
+
+[connection signal="body_entered" from="Goals/GoalOrange" to="Goals" method="handle_goal" binds= [ "orange" ]]
+
+[connection signal="body_entered" from="Goals/GoallBlue" to="Goals" method="handle_goal" binds= [ "blue" ]]
 
 

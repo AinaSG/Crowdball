@@ -3,11 +3,13 @@ extends RigidBody2D
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
+var cosmetic = -1
+onready var global = get_node("/root/buzz")
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
+	if global.max_heads > cosmetic:
+		get_node("Custom").texture = global.head_cosm[cosmetic]
+	
 
 func launch():
 	var p1 = global_position
