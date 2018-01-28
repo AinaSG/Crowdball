@@ -4,9 +4,14 @@ extends Node2D
 # var a = 2
 # var b = "textvar"
 
+const SCORES_TO_WIN = 1
+
 var goals_blue = 0
 var goals_orange = 0
 onready var Balls = get_node("../Balls")
+onready var Scores = get_node("../Scores")
+onready var Timer = get_node("Timer")
+
 export(NodePath) var score_blue_
 export(NodePath) var score_orange_
 
@@ -18,16 +23,24 @@ func _ready():
 	score_blue = get_node(score_blue_)
 	pass
 	
-func handle_goal(ball, receiving_team):
+func handle_goal(ball, scoring_team):
 	ball.queue_free()
-	if receiving_team == "orange":
-		goals_blue += 1
-		Balls.spawn_ball(Balls.LEFT_SPAWN)
-	elif receiving_team == "blue":
+	if scoring_team == "orange":
 		goals_orange += 1
 		Balls.spawn_ball(Balls.RIGHT_SPAWN)
+	elif scoring_team == "blue":
+		goals_blue += 1
+		Balls.spawn_ball(Balls.LEFT_SPAWN)
 		
 	score_orange.text = str(goals_orange)
 	score_blue.text = str(goals_blue)
+	
+	if goals_orange >= SCORES_TO_WIN:
+		Scores.show_win("orange")
+		Timer.start()
+	elif goals_blue >= SCORES_TO_WIN:
+		Scores.show_win("blue")
+		Timer.start()
 		
 	print("blue %d - %d orange" % [goals_blue, goals_orange])
+	

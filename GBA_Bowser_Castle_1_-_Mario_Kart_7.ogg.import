@@ -1,0 +1,18 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/GBA_Bowser_Castle_1_-_Mario_Kart_7.ogg-17094b893d65fcfe478a99f455c189d7.oggstr"
+
+[deps]
+
+source_file="res://GBA_Bowser_Castle_1_-_Mario_Kart_7.ogg"
+source_md5="ca1db5e889ccc6c1e0683933a30bd8a6"
+
+dest_files=[ "res://.import/GBA_Bowser_Castle_1_-_Mario_Kart_7.ogg-17094b893d65fcfe478a99f455c189d7.oggstr" ]
+dest_md5="fa2019003cc6eb76e12793b94f081877"
+
+[params]
+
+loop=true
+loop_offset=0

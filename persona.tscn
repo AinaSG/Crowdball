@@ -1,11 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://persona.gd" type="Script" id=1]
 [ext_resource path="res://Humer.gd" type="Script" id=2]
 [ext_resource path="res://102215_1200_howtoroundt6.png" type="Texture" id=3]
 [ext_resource path="res://Radi.gd" type="Script" id=4]
 [ext_resource path="res://orange_bod.png" type="Texture" id=5]
-[ext_resource path="res://Cap.gd" type="Script" id=6]
+[ext_resource path="res://Sprite.gd" type="Script" id=6]
+[ext_resource path="res://Cap.gd" type="Script" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -30,6 +31,7 @@ bounce = 0.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 player_id = -1
+team = 1
 
 [node name="B_Dret" type="Node2D" parent="." index="0"]
 
@@ -38,6 +40,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Humer" type="RigidBody2D" parent="B_Dret" index="0"]
 
+editor/display_folded = true
 position = Vector2( 0.655853, 1.04031 )
 input_pickable = false
 collision_layer = 1
@@ -133,6 +136,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="B_Esquerra" type="Node2D" parent="." index="1"]
 
+editor/display_folded = true
 position = Vector2( -25, -38 )
 _sections_unfolded = [ "Transform" ]
 
@@ -259,6 +263,7 @@ _sections_unfolded = [ "Angular", "Applied Forces", "Collision", "Linear", "Pick
 position = Vector2( 0, -21.1151 )
 scale = Vector2( 0.121013, 0.121013 )
 texture = ExtResource( 5 )
+script = ExtResource( 6 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
 [node name="Custom" type="Sprite" parent="Cos" index="1"]
@@ -275,7 +280,7 @@ shape = SubResource( 2 )
 [node name="Cap" type="Node2D" parent="Cos" index="3"]
 
 position = Vector2( 0, -21 )
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 
 [node name="Timer" type="Timer" parent="Cos/Cap" index="0"]
 

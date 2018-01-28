@@ -11,12 +11,13 @@ config_version=3
 [application]
 
 config/name="Transmission"
-run/main_scene="res://main.tscn"
+run/main_scene="res://Cosmetic_selecc1.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 buzz="*res://buzz.gd"
+Music="*res://Music.tscn"
 
 [display]
 

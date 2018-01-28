@@ -1,12 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
-[ext_resource path="res://Balls.gd" type="Script" id=2]
-[ext_resource path="res://Rotor.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Goals.gd" type="Script" id=4]
-[ext_resource path="res://Goal.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scores.gd" type="Script" id=6]
-[ext_resource path="res://font.tres" type="DynamicFont" id=7]
+[ext_resource path="res://coloured-summer-background_1048-2276_WQjVTfS.jpg" type="Texture" id=2]
+[ext_resource path="res://Balls.gd" type="Script" id=3]
+[ext_resource path="res://Rotor.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Goals.gd" type="Script" id=5]
+[ext_resource path="res://Goal.tscn" type="PackedScene" id=6]
+[ext_resource path="res://arrow.png" type="Texture" id=7]
+[ext_resource path="res://Scores.gd" type="Script" id=8]
+[ext_resource path="res://font.tres" type="DynamicFont" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -18,9 +20,13 @@ extents = Vector2( 30, 250 )
 custom_solver_bias = 0.0
 extents = Vector2( 750, 20 )
 
+[sub_resource type="Theme" id=4]
+
+default_font = ExtResource( 9 )
+
 [sub_resource type="Theme" id=3]
 
-default_font = ExtResource( 7 )
+default_font = ExtResource( 9 )
 _sections_unfolded = [ "Resource" ]
 
 [node name="Main" type="StaticBody2D" index="0"]
@@ -36,21 +42,30 @@ bounce = 0.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Balls" type="Node2D" parent="." index="0"]
+[node name="Sprite" type="Sprite" parent="." index="0"]
 
-script = ExtResource( 2 )
+position = Vector2( 710.427, -264.259 )
+rotation = -1.5708
+scale = Vector2( 1.36207, 2.7539 )
+z_index = -1
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+
+[node name="Balls" type="Node2D" parent="." index="1"]
+
+script = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Rotor" parent="." index="1" instance=ExtResource( 3 )]
+[node name="Rotor" parent="." index="2" instance=ExtResource( 4 )]
 
 position = Vector2( 300, -450 )
 direction = -1
 
-[node name="Rotor2" parent="." index="2" instance=ExtResource( 3 )]
+[node name="Rotor2" parent="." index="3" instance=ExtResource( 4 )]
 
 position = Vector2( 1100, -450 )
 
-[node name="Walls" type="Node2D" parent="." index="3"]
+[node name="Walls" type="Node2D" parent="." index="4"]
 
 _sections_unfolded = [ "Transform" ]
 
@@ -123,21 +138,46 @@ position = Vector2( 0, 100 )
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Goals" type="Node2D" parent="." index="4"]
+[node name="Goals" type="Node2D" parent="." index="5"]
 
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 score_blue_ = NodePath("../Scores/LabelBlue")
 score_orange_ = NodePath("../Scores/LabelOrange")
 
-[node name="GoalOrange" parent="Goals" index="0" instance=ExtResource( 5 )]
+[node name="GoalOrange" parent="Goals" index="0" instance=ExtResource( 6 )]
 
 position = Vector2( -145, -100 )
+collision_layer = 8
 
-[node name="GoallBlue" parent="Goals" index="1" instance=ExtResource( 5 )]
+[node name="Sprite" type="Sprite" parent="Goals/GoalOrange" index="1"]
+
+modulate = Color( 0.611847, 0.895483, 0.960938, 1 )
+position = Vector2( 2, 0 )
+scale = Vector2( -0.5, 0.5 )
+texture = ExtResource( 7 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="GoallBlue" parent="Goals" index="1" instance=ExtResource( 6 )]
 
 position = Vector2( 1545, -100 )
 
-[node name="Scores" type="Control" parent="." index="5"]
+[node name="Sprite2" type="Sprite" parent="Goals/GoallBlue" index="1"]
+
+modulate = Color( 0.960938, 0.832756, 0.611847, 1 )
+position = Vector2( -2, 0 )
+rotation = -3.14159
+scale = Vector2( -0.5, 0.5 )
+texture = ExtResource( 7 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="Timer" type="Timer" parent="Goals" index="2"]
+
+process_mode = 1
+wait_time = 5.0
+one_shot = true
+autostart = false
+
+[node name="Scores" type="Control" parent="." index="6"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -150,24 +190,24 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 6 )
+script = ExtResource( 8 )
 
-[node name="LabelOrange" type="Label" parent="Scores" index="0"]
+[node name="LabelBlue" type="Label" parent="Scores" index="0"]
 
 anchor_left = 0.05
 anchor_top = 0.0
 anchor_right = 0.05
 anchor_bottom = 0.0
-margin_left = -2.0
+margin_left = 498.0
 margin_top = -600.0
-margin_right = 198.0
+margin_right = 698.0
 margin_bottom = -400.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 6
-custom_fonts/font = ExtResource( 7 )
+theme = SubResource( 4 )
 text = "0"
 align = 1
 valign = 1
@@ -177,17 +217,17 @@ uppercase = true
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Anchor", "Focus", "Hint", "Mouse", "Rect", "Size Flags", "Theme", "custom_fonts" ]
+_sections_unfolded = [ "Anchor", "Focus", "Hint", "Mouse", "Rect", "Size Flags", "Theme", "custom_fonts", "custom_styles" ]
 
-[node name="LabelBlue" type="Label" parent="Scores" index="1"]
+[node name="LabelOrange" type="Label" parent="Scores" index="1"]
 
 anchor_left = 0.05
 anchor_top = 0.0
 anchor_right = 0.05
 anchor_bottom = 0.0
-margin_left = 1198.0
+margin_left = 698.0
 margin_top = -600.0
-margin_right = 1398.0
+margin_right = 898.0
 margin_bottom = -400.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
@@ -206,8 +246,64 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Focus", "Hint", "Mouse", "Rect", "Size Flags", "Theme", "custom_fonts" ]
 
+[node name="OrangeWins" type="Label" parent="Scores" index="2"]
+
+anchor_left = 0.05
+anchor_top = 0.0
+anchor_right = 0.05
+anchor_bottom = 0.0
+margin_left = -2.0
+margin_top = -300.0
+margin_right = 1398.0
+margin_bottom = -100.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme = SubResource( 4 )
+text = "ORANGE WINS"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+uppercase = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "Focus", "Hint", "Mouse", "Rect", "Size Flags", "Theme", "custom_fonts", "custom_styles" ]
+
+[node name="BlueWins" type="Label" parent="Scores" index="3"]
+
+anchor_left = 0.05
+anchor_top = 0.0
+anchor_right = 0.05
+anchor_bottom = 0.0
+margin_left = -2.0
+margin_top = -300.0
+margin_right = 1398.0
+margin_bottom = -100.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme = SubResource( 4 )
+text = "BLUE WINS"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+uppercase = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "Focus", "Hint", "Mouse", "Rect", "Size Flags", "Theme", "custom_fonts", "custom_styles" ]
+
 [connection signal="body_entered" from="Goals/GoalOrange" to="Goals" method="handle_goal" binds= [ "orange" ]]
 
 [connection signal="body_entered" from="Goals/GoallBlue" to="Goals" method="handle_goal" binds= [ "blue" ]]
+
+[connection signal="timeout" from="Goals/Timer" to="." method="reset_game"]
 
 

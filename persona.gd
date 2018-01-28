@@ -4,13 +4,15 @@ extends Node2D
 # var a = 2
 # var b = "textvar"
 export var player_id = -1
+export var team = 1
+
 const HUMER_VEL = 10
 const RADI_VEL = 8
 const IDLE_ANGULAR_DAMP = INF
 const SOFTNESS = -0.001
 const BIAS = 0.9
 const SWING_DEGREES = 50
-const SWING_SPEED = 0.2
+const SWING_SPEED = 0.5
 
 onready var humer_d = get_node("B_Dret/Humer")
 onready var humer_e = get_node("B_Esquerra/Humer")
