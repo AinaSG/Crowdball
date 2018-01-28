@@ -119,7 +119,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Goals" type="Node2D" parent="." index="4"]
 
-editor/display_folded = true
 script = ExtResource( 4 )
 
 [node name="Goal" parent="Goals" index="0" instance=ExtResource( 5 )]
